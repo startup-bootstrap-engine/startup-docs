@@ -1,0 +1,21 @@
+{
+  "workbench.activityBar.orientation": "vertical",
+
+  "github.copilot.chat.customInstructions": {
+    "*.ts": [
+      "favor interfaces over types",
+      "use I prefix on interfaces",
+      "constant naming should be UPPER_CASE",
+      "use camelCase for variables",
+      "prefer named exports over default exports",
+      "use arrow functions over function expressions",
+      "use const over let",
+      "use template strings over string concatenation",
+      "use double quotes for strings",
+      "use async/await over promises"
+    ]
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "IricBing.iricbing-markdown-formatter"
+  }
+}
