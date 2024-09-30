@@ -6,7 +6,8 @@ import clsx from 'clsx';
 import { Redirect } from '@docusaurus/router';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '../components/HomepageFeatures';
-import { appEnv } from '../constants/appEnv';
+
+import { getEnv } from '../services/getEnv';
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -34,10 +35,15 @@ function HomepageHeader() {
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-  const hasLandingURL = appEnv.general.landingURL !== '/';
+
+  const landingURL = getEnv('landingURL');
+
+  console.log('landingURL', landingURL);
+
+  const hasLandingURL = landingURL !== '/';
 
   if (hasLandingURL) {
-    return <Redirect to={appEnv.general.landingURL} />;
+    return <Redirect to={landingURL} />;
   }
 
   return (

@@ -3,17 +3,12 @@
 case $1 in
 "dev")
   echo "Generating Development environment .env files"
-  cp -fr ./environment/dev.env .env
+  cp -fr ./environment/docusaurus.config.dev.ts ./src/docusaurus.config.ts
   ;;
 
 "prod")
   echo "Generating Production environment .env files"
-  cp -fr ./environment/prod.env .env
-  ;;
-
-"debug")
-  echo "Generating Debug WSL environment .env files"
-  cp -fr ./environment/dev.env .env
+  cp -fr ./environment/docusaurus.config.prod.ts ./src/docusaurus.config.ts
   ;;
 
 *)
