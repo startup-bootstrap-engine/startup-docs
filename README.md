@@ -1,12 +1,21 @@
-# Website
+# @startup-docs
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+This documentation app is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-### Installation
+### Pre-requisites
+
+* [Node.js](https://nodejs.org/en/download/)
+* [Yarn](https://yarnpkg.com/getting-started/install)
+
+To get started, please run the following command, to generate your configuration files:
 
 ```
-$ yarn
+$ yarn configure
 ```
+
+### Environment Variables
+
+Environment variables are defined within the `docusaurus.config.ts` file using the `customFields` object.
 
 ### Local Development
 
