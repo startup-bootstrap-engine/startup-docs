@@ -76,8 +76,7 @@ Clone the repositories from this [link](https://github.com/orgs/startup-bootstra
 ```bash
 ./startup-engine
    ./startup-api
-   ./startup-mobile
-   ./startup-web
+   ./startup-mobile 
    ./startup-shared
    ./startup-docs
 ```
