@@ -251,7 +251,7 @@ Docusaurus allows you to extend functionality using plugins.
 
 ## Environment Variables
 
-Environment variables can be managed within the `docusaurus.config.js` using the `customFields` object or via `.env` files for sensitive data.
+Environment variables can be managed within the `docusaurus.config.js` using the `customFields` object.
 
 ### Using `customFields`
 
@@ -273,20 +273,7 @@ function MyComponent() {
   const { siteConfig } = useDocusaurusContext();
   return <div>API URL: {siteConfig.customFields.apiUrl}</div>;
 }
-```
-
-### Using `.env` Files
-
-1. **Create a `.env` File**
-
-   ```env
-   API_KEY=your_api_key_here
-   ```
-
-2. **Access Environment Variables**
-
-   Use `process.env.API_KEY` in your configuration or code. Ensure sensitive variables are not exposed to the client-side.
-
+``` 
 ---
 
 ## Local Development
@@ -301,6 +288,10 @@ yarn start
   - Launches a local server at `http://localhost:3000`.
   - Opens the site in your default browser.
   - Watches for file changes and reloads automatically.
+
+### Enabling Search
+
+To enable search, please start the server with `yarn start` command instead of `yarn dev`.
 
 ---
 
