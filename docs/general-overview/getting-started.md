@@ -1,5 +1,7 @@
 # Getting Started
 
+Welcome to the Startup Engine project! This is the initial entry point for anyone who wants to contribute. This section covers some initial instructions, guidelines and etc. Note that you'll also need to do a [OS setup](../os/os-setup.md) and service specific setups (check the end of this file for links.)
+
 ## Pre-requisites
 
 
