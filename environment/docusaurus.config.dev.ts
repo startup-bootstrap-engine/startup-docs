@@ -9,8 +9,8 @@ const customFields = {
 export type EnvKeys = keyof typeof customFields;
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'Startup Engine',
+  tagline: 'Documentation for Startup Engine',
   favicon: 'img/favicon.ico',
 
   customFields,
@@ -83,9 +83,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'My Site',
+      title: 'Startup Engine',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Startup Engine Logo',
         src: 'img/logo.svg',
       },
       items: [
