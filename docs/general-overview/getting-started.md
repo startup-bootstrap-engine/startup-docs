@@ -81,56 +81,8 @@ Clone the repositories from this [link](https://github.com/orgs/startup-bootstra
    ./startup-shared
    ./startup-docs
 ```
-Make sure you install your project dependencies using:
 
-```bash
-yarn install
-```
 
-### Setup Each Project
-
-This step should be done for every repository listed above.
-
-On the root of every project (EXCEPT startup-api) listed above, run:
-
-```bash
-yarn install
-yarn configure
-```
-
-for STARTUP-API project, run:
-
-```bash
-yarn install
-yarn configure:first-time
-
-# Once everything is setup, run:
-docker-compose up
-```
- 
-After running these commands, all of the required files will be set up and your project will be running in Development mode by default (check your `.env` file).
-
-**Ensure:**
-- You have a `.env`, `docker-compose.yml`, and `Dockerfile` file in the root of your projects after running `yarn configure`.
-- If not, you probably don’t have `wget` installed on your OS (especially if using Windows). Install it and try again!
-
-#### Switching Between Environments
-
-When needed, switch between environments by typing:
-
-```bash
-yarn env:switch:dev
-```
-
-or
-
-```bash
-yarn env:switch:prod
-```
-
-**Note:** You’ll mostly be using the Development environment at the beginning.
-
-Please do this additional setup as required by this section (check the sub-sections).
 
 ### Project Codebase Overview
 

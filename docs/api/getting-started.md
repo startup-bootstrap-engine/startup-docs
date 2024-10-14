@@ -41,3 +41,21 @@ _If this yellow message appears when running `startup-api`, it means everything 
 ## Interacting with the API
 
 - [REST Client](./REST-client.mdx)
+
+## Switching Between Environments
+
+When needed, switch between environments by typing:
+
+```bash
+yarn env:switch:dev
+```
+
+or
+
+```bash
+yarn env:switch:prod
+```
+Then, make sure you run `docker-compose build startup-api` and `docker-compose up startup-api` to apply the changes.
+
+**Note:** You’ll mostly be using the Development environment at the beginning. Production mode is only used in production (of course!) and to emulate production conditions locally, for testing purposes.
+
