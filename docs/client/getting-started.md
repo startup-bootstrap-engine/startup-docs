@@ -18,7 +18,7 @@ sidebar_position: 0
 ## Initial configuration
  
 
-- Clone [startup-fe](https://github.com/startup-bootstrap-engine/startup-fei) inside of your `~/startup-engine` folder, as suggested in our [general overview](../general-overview/getting-started.md).
+- Clone [startup-mobile](https://github.com/startup-bootstrap-engine/startup-mobile) inside of your `~/startup-engine` folder, as suggested in our [general overview](../general-overview/getting-started.md).
 
 - Run `yarn install` to install the dependencies.
 
