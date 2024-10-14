@@ -8,38 +8,74 @@ If you're short on time, you can run this script to setup your terminal. It will
 # Exit immediately if a command exits with a non-zero status
 set -e
 
+# ----------------------------
 # Variables
+# ----------------------------
+
+# URLs
 OH_MY_ZSH_URL="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 NVM_INSTALL_URL="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh"
-POWERLINE_FONTS="fonts-powerline"
+
+# Directories
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 ZSH_AUTOSUGGESTIONS_DIR="$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 ZSH_SYNTAX_HIGHLIGHTING_DIR="$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-SSH_KEY="$HOME/.ssh/id_rsa"
-ZSHRC_FILE="$HOME/.zshrc"
 
-# Function to print messages with formatting
+# Files
+SHELL_CONFIG=$( [ -n "$ZSH_VERSION" ] && echo "$HOME/.zshrc" || echo "$HOME/.bashrc" )
+ZSHRC_FILE="$HOME/.zshrc"
+SSH_KEY="$HOME/.ssh/id_rsa"
+
+# ----------------------------
+# Helper Functions
+# ----------------------------
+
 print_message() {
     echo -e "\n========================================"
     echo -e "$1"
     echo -e "========================================\n"
 }
 
-# Function to update and upgrade system packages
+install_package_if_missing() {
+    PACKAGE=$1
+    if ! dpkg -s "$PACKAGE" >/dev/null 2>&1; then
+        echo "Installing $PACKAGE..."
+        sudo apt-get install -y "$PACKAGE"
+    else
+        echo "$PACKAGE is already installed."
+    fi
+}
+
+# ----------------------------
+# Step 1: Update System and Install Basic Utilities
+# ----------------------------
+
 update_system() {
     print_message "Updating package list and upgrading existing packages..."
-    sudo apt update && sudo apt upgrade -y
+    sudo apt-get update
+    sudo apt-get upgrade -y
 }
 
-install_basic_dependencies() {
-    print_message "Installing basic dependencies..."
-    sudo apt-get install -y libssl-dev cmake build-essential
+install_basic_utilities() {
+    print_message "Installing basic utilities..."
+    install_package_if_missing "wget"
+    install_package_if_missing "curl"
+    install_package_if_missing "git"
+    install_package_if_missing "unzip"
+    install_package_if_missing "build-essential"
+    install_package_if_missing "cmake"
+    install_package_if_missing "libssl-dev"
+    install_package_if_missing "zsh"
+    install_package_if_missing "fonts-powerline"
 }
 
-# Function to install Zsh
+# ----------------------------
+# Step 2: Install and Configure Zsh with Oh My Zsh
+# ----------------------------
+
 install_zsh() {
     print_message "Installing Zsh..."
-    sudo apt install -y zsh
+    install_package_if_missing "zsh"
 
     if command -v zsh >/dev/null 2>&1; then
         echo "Zsh installed successfully."
@@ -49,7 +85,6 @@ install_zsh() {
     fi
 }
 
-# Function to change the default shell to Zsh
 change_default_shell() {
     print_message "Changing the default shell to Zsh for user $(whoami)..."
     if [ "$(basename "$SHELL")" != "zsh" ]; then
@@ -60,7 +95,6 @@ change_default_shell() {
     fi
 }
 
-# Function to install Oh My Zsh
 install_oh_my_zsh() {
     if [ ! -d "$HOME/.oh-my-zsh" ]; then
         print_message "Installing Oh My Zsh..."
@@ -70,7 +104,6 @@ install_oh_my_zsh() {
     fi
 }
 
-# Function to install Zsh plugins
 install_zsh_plugins() {
     # Install zsh-autosuggestions
     if [ ! -d "$ZSH_AUTOSUGGESTIONS_DIR" ]; then
@@ -89,48 +122,6 @@ install_zsh_plugins() {
     fi
 }
 
-# Function to install NVM
-install_nvm() {
-    if [ ! -d "$HOME/.nvm" ]; then
-        print_message "Installing NVM (Node Version Manager)..."
-        curl -o- "$NVM_INSTALL_URL" | bash
-    else
-        echo "NVM is already installed."
-    fi
-}
-
-# Function to configure NVM in .zshrc
-configure_nvm() {
-    if ! grep -q 'export NVM_DIR="$HOME/.nvm"' "$ZSHRC_FILE"; then
-        print_message "Configuring NVM in .zshrc..."
-        {
-            echo ""
-            echo "# NVM Configuration"
-            echo 'export NVM_DIR="$HOME/.nvm"'
-            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm'
-            echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion'
-        } >> "$ZSHRC_FILE"
-    else
-        echo "NVM is already configured in .zshrc."
-    fi
-}
-
-# Function to install the latest stable Node.js using NVM
-install_node() {
-    # Load NVM
-    export NVM_DIR="$HOME/.nvm"
-    # shellcheck source=/dev/null
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-    print_message "Installing Node.js v18.20.4..."
-    nvm install 18.20.4
-    nvm use 18.20.4
-    nvm alias default 18.20.4
-
-    echo "Node.js $(node -v) and npm $(npm -v) have been installed."
-}
-
-# Function to configure Oh My Zsh plugins in .zshrc
 configure_oh_my_zsh() {
     # Backup existing .zshrc if not already backed up
     if [ ! -f "$HOME/.zshrc.pre-oh-my-zsh" ]; then
@@ -148,13 +139,56 @@ configure_oh_my_zsh() {
     fi
 }
 
-# Function to install Powerline fonts
-install_powerline_fonts() {
-    print_message "Installing Powerline fonts for better visuals..."
-    sudo apt install -y "$POWERLINE_FONTS"
+# ----------------------------
+# Step 3: Install NVM and Node.js
+# ----------------------------
+
+install_nvm() {
+    if [ ! -d "$HOME/.nvm" ]; then
+        print_message "Installing NVM (Node Version Manager)..."
+        curl -o- "$NVM_INSTALL_URL" | bash
+    else
+        echo "NVM is already installed."
+    fi
 }
 
-# Function to generate SSH key
+configure_nvm() {
+    if ! grep -q 'export NVM_DIR="$HOME/.nvm"' "$ZSHRC_FILE"; then
+        print_message "Configuring NVM in .zshrc..."
+        {
+            echo ""
+            echo "# NVM Configuration"
+            echo 'export NVM_DIR="$HOME/.nvm"'
+            echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm'
+            echo '[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion'
+        } >> "$ZSHRC_FILE"
+    else
+        echo "NVM is already configured in .zshrc."
+    fi
+}
+
+install_node() {
+    # Load NVM
+    export NVM_DIR="$HOME/.nvm"
+    # shellcheck source=/dev/null
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    if ! command -v node >/dev/null 2>&1; then
+        print_message "Installing Node.js v18.20.4..."
+        nvm install 18.20.4
+        nvm use 18.20.4
+        nvm alias default 18.20.4
+
+        echo "Node.js $(node -v) and npm $(npm -v) have been installed."
+    else
+        echo "Node.js is already installed."
+    fi
+}
+
+# ----------------------------
+# Step 4: Configure SSH Keys
+# ----------------------------
+
 configure_ssh() {
     print_message "Configuring SSH key..."
 
@@ -178,69 +212,38 @@ configure_ssh() {
     fi
 }
 
-# Function to add custom aliases and functions to .zshrc
+# ----------------------------
+# Step 5: Add Custom Aliases and Functions
+# ----------------------------
+
 configure_custom_aliases() {
-    print_message "Adding custom aliases and functions to .zshrc..."
+    print_message "Adding custom aliases and functions to $SHELL_CONFIG..."
 
-    # Add alias for dlsapi if it doesn't exist
-    if ! grep -q '^alias dlsapi=' "$ZSHRC_FILE"; then
-        echo 'alias dlsapi="docker-compose logs -f --tail=100 startup-api"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dlsapi' to .zshrc."
-    else
-        echo "Alias 'dlsapi' already exists in .zshrc."
-    fi
+    # Define aliases and functions
+    declare -A aliases=(
+        ["dlsapi"]="docker-compose logs -f --tail=100 startup-api"
+        ["dcup"]="docker-compose up -d"
+        ["dcre"]="docker-compose restart"
+        ["dcstop"]="docker-compose stop"
+        ["dcb"]="docker-compose build"
+        ["dcrm"]="docker-compose rm -f"
+        ["dcd"]="docker-compose down"
+    )
 
-    # Add alias for dcup if it doesn't exist
-    if ! grep -q '^alias dcup=' "$ZSHRC_FILE"; then
-        echo 'alias dcup="docker-compose up -d"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcup' to .zshrc."
-    else
-        echo "Alias 'dcup' already exists in .zshrc."
-    fi
-
-    # Add alias for dcre (restart) if it doesn't exist
-    if ! grep -q '^alias dcre=' "$ZSHRC_FILE"; then
-        echo 'alias dcre="docker-compose restart"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcre' to .zshrc."
-    else
-        echo "Alias 'dcre' already exists in .zshrc."
-    fi
-
-    # Add alias for dcstop if it doesn't exist
-    if ! grep -q '^alias dcstop=' "$ZSHRC_FILE"; then
-        echo 'alias dcstop="docker-compose stop"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcstop' to .zshrc."
-    else
-        echo "Alias 'dcstop' already exists in .zshrc."
-    fi
-
-    # Add alias for dcb (build) if it doesn't exist
-    if ! grep -q '^alias dcb=' "$ZSHRC_FILE"; then
-        echo 'alias dcb="docker-compose build"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcb' to .zshrc."
-    else
-        echo "Alias 'dcb' already exists in .zshrc."
-    fi
-
-    # Add alias for dcrm (remove) if it doesn't exist
-    if ! grep -q '^alias dcrm=' "$ZSHRC_FILE"; then
-        echo 'alias dcrm="docker-compose rm -f"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcrm' to .zshrc."
-    else
-        echo "Alias 'dcrm' already exists in .zshrc."
-    fi
-
-    # Add alias for dcd (down) if it doesn't exist
-    if ! grep -q '^alias dcd=' "$ZSHRC_FILE"; then
-        echo 'alias dcd="docker-compose down"' >> "$ZSHRC_FILE"
-        echo "Added alias 'dcd' to .zshrc."
-    else
-        echo "Alias 'dcd' already exists in .zshrc."
-    fi
+    # Add aliases if they don't exist
+    for alias_name in "${!aliases[@]}"; do
+        alias_command="alias $alias_name=\"${aliases[$alias_name]}\""
+        if ! grep -q "^alias $alias_name=" "$SHELL_CONFIG"; then
+            echo "$alias_command" >> "$SHELL_CONFIG"
+            echo "Added alias '$alias_name' to $SHELL_CONFIG."
+        else
+            echo "Alias '$alias_name' already exists in $SHELL_CONFIG."
+        fi
+    done
 
     # Add generic dl function if it doesn't exist
-    if ! grep -q '^dl()' "$ZSHRC_FILE"; then
-        cat << 'EOF' >> "$ZSHRC_FILE"
+    if ! grep -q '^dl()' "$SHELL_CONFIG"; then
+        cat << 'EOF' >> "$SHELL_CONFIG"
 
 # Generic function to view logs of any container
 dl() {
@@ -251,42 +254,63 @@ dl() {
     docker-compose logs -f --tail=100 "$1"
 }
 EOF
-        echo "Added function 'dl' to .zshrc."
+        echo "Added function 'dl' to $SHELL_CONFIG."
     else
-        echo "Function 'dl' already exists in .zshrc."
+        echo "Function 'dl' already exists in $SHELL_CONFIG."
     fi
 }
 
-# Main execution flow
-main() {
-    update_system
-    install_basic_dependencies
-    install_zsh
-    change_default_shell
-    install_oh_my_zsh
-    install_zsh_plugins
-    install_nvm
-    configure_nvm
-    install_node
-    configure_oh_my_zsh
-    install_powerline_fonts
-    configure_ssh
-    configure_custom_aliases
+# ----------------------------
+# Step 6: Install Powerline Fonts
+# ----------------------------
 
+install_powerline_fonts() {
+    print_message "Installing Powerline fonts for better visuals..."
+    install_package_if_missing "fonts-powerline"
+    echo "Powerline fonts installation complete."
+}
+
+# ----------------------------
+# Step 7: Finalizing Setup
+# ----------------------------
+
+finalize_setup() {
     print_message "Setup complete! Please restart your terminal or run 'exec zsh' to apply the changes."
 
     echo "To verify:
-    1. Zsh is set as the default shell.
-    2. Oh My Zsh is installed.
-    3. Plugins (zsh-autosuggestions and zsh-syntax-highlighting) are active.
-    4. NVM is installed and configured.
-    5. Node.js $(node -v) is installed.
+1. Zsh is set as the default shell.
+2. Oh My Zsh is installed.
+3. Plugins (zsh-autosuggestions and zsh-syntax-highlighting) are active.
+4. NVM is installed and configured.
+5. Node.js $(node -v) is installed.
 
 You can now manage Node.js versions using NVM, e.g., 'nvm install <version>'."
 }
 
+# ----------------------------
+# Main Execution Flow
+# ----------------------------
+
+main() {
+    update_system
+    install_basic_utilities
+    install_zsh
+    change_default_shell
+    install_oh_my_zsh
+    install_zsh_plugins
+    configure_oh_my_zsh
+    install_nvm
+    configure_nvm
+    install_node
+    install_powerline_fonts
+    configure_ssh
+    configure_custom_aliases
+    finalize_setup
+}
+
 # Execute main function
 main
+
 ```
 
 ### OS Setup Documentation: Automated Zsh & Node.js Environment Setup Script
