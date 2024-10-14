@@ -46,6 +46,11 @@ After setting this up, please run `yarn module:build`. This will dynamically con
    - Make sure you have Robo3T already installed, from the link above.
 
 3. **Connect to Database:**
+
+   ![Connect to Database](../img/robo3t-connection.png)
+   _Make sure all fields below are properly filled, as demonstrated on the image above._
+   
+
    - Open Robo3T.
    - Click on the **"File"** option, then on **"Connect..."**.
    - Create a new connection with the following settings:
