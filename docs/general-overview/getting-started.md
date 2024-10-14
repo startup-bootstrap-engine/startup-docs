@@ -85,7 +85,6 @@ Make sure you install your project dependencies using:
 yarn install
 ```
 
-
 ### Setup Each Project
 
 This step should be done for every repository listed above.
@@ -132,23 +131,7 @@ yarn env:switch:prod
 
 Please do this additional setup as required by this section (check the sub-sections).
 
-
-
-#### Accessing API Routes
-
-This is important to be understood by both front-end and back-end sub-teams!
-
-Please check:
-
-- [REST API Client](#)
-
-
-### 6. Install ESLint and Prettier VSCode Extensions
-
-- [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
-- [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-
-### 7. Get a Project Codebase Overview
+### Project Codebase Overview
 
 This is one of the most important steps! Watch our videos so you can have a clear understanding of our codebase before starting our tasks.
 
@@ -156,28 +139,14 @@ This is one of the most important steps! Watch our videos so you can have a clea
 
 Take your time to review these videos. It's important to become familiar with our codebase before jumping into solving any tasks. Focus especially on the videos related to your area (front-end or back-end), if that's the case.
 
-### 8. Setup HTTP REST Client
+### Read Our Git Guidelines
 
-Check our [HTTP Rest Client documentation](#) here.
+Check our [Git guidelines](./git.md) here.
 
-This is what we use to manage our API routes. It has the same function as Postman/Insomnia, but we opted for this VSCode extension because it's free for teams and super easy to use.
 
-### 9. Read Our Git Guidelines
+### Finishing
 
-Check our [Git guidelines](#) here.
+After finishing the general overview guide, please follow though the setup of each individual service.
 
-### 10. Install Some Suggested Extensions
-
-- **Tutorial:** Watch [this tutorial](https://www.youtube.com/watch?v=Nbah9ohzSI4) where I walk you through the extensions I use.
-- **Extensions List:** Take a look at our suggested extensions list.
-  - Make sure you have all from the required extension list; otherwise, the project won't run properly in your VSCode (missing linting, formatting issues, etc.).
-
-### 11. (Missing Step)
-
-*Note: Step 11 appears to be missing in the original content.*
-
-### 12. Follow Our Productivity Tips
-
-Check our [productivity tips](#) here!
-
-```
+- [API](../api/getting-started.md)
+- [Client](../client/getting-started.md)
