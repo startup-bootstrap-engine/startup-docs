@@ -132,9 +132,8 @@ Please do this additional setup as required by this section (check the sub-secti
 
 ### Project Codebase Overview
 
-This is one of the most important steps! Watch our videos so you can have a clear understanding of our codebase before starting our tasks.
+This is one of the most important steps! [Watch our videos](./project-structure-overview.mdx) so you can have a clear understanding of our codebase before starting our tasks.
 
-- **Start by clicking [here](#).**
 
 Take your time to review these videos. It's important to become familiar with our codebase before jumping into solving any tasks. Focus especially on the videos related to your area (front-end or back-end), if that's the case.
 
@@ -143,7 +142,7 @@ Take your time to review these videos. It's important to become familiar with ou
 Check our [Git guidelines](./git.md) here.
 
 
-### Finishing
+### Next Steps
 
 After finishing the general overview guide, please follow though the setup of each individual service.
 
