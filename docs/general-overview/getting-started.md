@@ -20,7 +20,7 @@ The project has voluntary enrollment. We do it here as a hobby. It's not freelan
   - It can also serve as a portfolio, but make it clear the parts you worked on.
 
 - **Coordination:**
-  - I () just coordinate the flow of tasks. I'm not anyone's boss or manager.
+  - I (Joao Paulo) just coordinate the flow of tasks. I'm not anyone's boss or manager.
   - It works better that way because I created the entire codebase from scratch and I have a lot of experience on what needs to be done.
 
 - **Task Autonomy:**
@@ -104,7 +104,6 @@ yarn configure:first-time
 
 # Once everything is setup, run:
 docker-compose up
-
 ```
  
 After running these commands, all of the required files will be set up and your project will be running in Development mode by default (check your `.env` file).
