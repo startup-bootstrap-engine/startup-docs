@@ -17,5 +17,6 @@
   },
   "[markdown]": {
     "editor.defaultFormatter": "IricBing.iricbing-markdown-formatter"
-  }
+  },
+  "workbench.colorTheme": "Activate UMBRA protocol"
 }
