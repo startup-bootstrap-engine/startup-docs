@@ -133,42 +133,6 @@ yarn env:switch:prod
 Please do this additional setup as required by this section (check the sub-sections).
 
 
-#### Robo3T (Recommended for Viewing MongoDB Data)
-
-- **Download Link:** [Robo3T Releases](https://github.com/Studio3T/robomongo/releases)
-  
-  **Note:** It's **NOT** the Studio version (that one is paid!). It's the hobbyist one. Feel free to use other tools if you’re more familiar with them. This is just an optional suggestion!
-
-#### Starting the Containers
-
-- Ensure you have a `.env` file in your `rpg-api` and `rpg-client` folders. You can create it by running `yarn configure` inside your project folder.
-- Simply run:
-  ```bash
-  docker-compose up
-  ```
-- **Important:** You **DON’T** need to run `npm` or `yarn run dev` after the containers are up and running! Docker already does it for you.
-
-#### Accessing Our Database on Robo3T
-
-1. **Ensure Docker DB Container is Running:**
-   - Make sure that your Docker DB container (`rpg-db`) is up and running.
-
-2. **Install Robo3T:**
-   - Please install the free edition of Robo3T.
-
-3. **Connect to Database:**
-   - Open Robo3T.
-   - Click on the **"File"** option, then on **"Connect..."**.
-   - Create a new connection with the following settings:
-     - **Connection Tab:**
-       - **Name:** RPG-Engine Dev
-       - **Address:** localhost
-       - **Port:** 27018
-     - **Authentication Tab:**
-       - **Database:** admin
-       - **User Name:** admin
-       - **Password:** 31416
-       - **Auth Mechanism:** SCRAM-SHA-1
 
 #### Accessing API Routes
 
@@ -178,24 +142,6 @@ Please check:
 
 - [REST API Client](#)
 
-#### Seeding Your Database with Dummy Data
-
-1. **Access Your `rpg-api` Project:**
-   
-2. **Run the Containers:**
-   ```bash
-   docker-compose up
-   ```
-   - Make sure `rpg-db` is active.
-
-3. **Download and Import Dummy Database:**
-   ```bash
-   yarn db:download
-   yarn db:import
-   ```
-
-4. **Verification:**
-   - Done! You can check your imported data in Robo3T.
 
 ### 6. Install ESLint and Prettier VSCode Extensions
 
