@@ -59,3 +59,6 @@ Then, make sure you run `docker-compose build startup-api` and `docker-compose u
 
 **Note:** You’ll mostly be using the Development environment at the beginning. Production mode is only used in production (of course!) and to emulate production conditions locally, for testing purposes.
 
+## Dynamic Module Building
+
+By default, you can keep the default modules from .env as is. However, if you want to customize our API with different databases or services, you can [check this guide](./dynamic-module-building.md) for more information.

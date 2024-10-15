@@ -1,9 +1,7 @@
 ---
 sidebar_position: 0
-title: Introduction
+title: Crash Course
 ---
-
-
 
 # Docusaurus 101 Crash Course
 

@@ -3,7 +3,7 @@ import type { Config } from '@docusaurus/types';
 import { themes as prismThemes } from 'prism-react-renderer';
 
 const customFields = {
-  landingURL: '/docs/intro',
+  landingURL: '/docs/category/general-overview',
 };
 
 export type EnvKeys = keyof typeof customFields;

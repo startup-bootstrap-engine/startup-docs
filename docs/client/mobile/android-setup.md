@@ -1,4 +1,4 @@
-# Android Setup
+# Android Environment Setup
 
 The following script will prepare your environment to run allow you to build android apps.
 
