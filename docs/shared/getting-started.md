@@ -13,4 +13,4 @@ Our startup-shared repository contains shared components and utilities that can 
 
 ## Testing Changes Locally
 
-Check [this guide](../general-overview/testing-changes-locally.md) to learn how to install and test changes locally, without the need of publishing to npm.
+Check [this guide](../general-overview/local-packages.md) to learn how to install and test changes locally, without the need of publishing to npm.

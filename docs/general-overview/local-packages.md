@@ -1,5 +1,5 @@
 
-# Testing Changes Locally
+# Local Packages
 
 When developing and testing npm modules locally, repeatedly publishing to the npm registry can be time-consuming and inefficient. This guide provides step-by-step instructions on how to install npm packages locally for testing purposes, allowing you to streamline your development workflow without the need for constant publishing.
 
