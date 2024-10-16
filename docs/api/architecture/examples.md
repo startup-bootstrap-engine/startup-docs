@@ -49,7 +49,7 @@ sequenceDiagram
 
 **Example**: `SignUpController.ts`
 
-```typescript:src/useCases/ModuleSystem/user/signup/SignUpController.ts
+```typescript
 @controller("/auth")
 export class SignUpController implements interfaces.Controller {
   constructor(private signupUseCase: SignUpUseCase, private analyticsHelper: AnalyticsHelper) {}
@@ -76,7 +76,7 @@ export class SignUpController implements interfaces.Controller {
 
 **Example**: `SignUpUseCase.ts`
 
-```typescript:src/useCases/ModuleSystem/user/signup/SignUpUseCase.ts
+```typescript
 @provide(SignUpUseCase)
 export class SignUpUseCase {
   constructor(private userRepository: UserRepository, private userAuth: UserAuth, private userPassword: UserPassword) {}
@@ -117,7 +117,7 @@ export class SignUpUseCase {
 
 **Example**: `UserModel.ts`
 
-```typescript:src/entities/ModuleSystem/UserModel.ts
+```typescript
 @provide(UserModel)
 export class UserModel extends BaseModel<ZodType<IUser>> {
   protected get modelName(): string {
@@ -140,7 +140,7 @@ export class UserModel extends BaseModel<ZodType<IUser>> {
 
 #### `BaseRepository.ts`
 
-```typescript:src/providers/database/repository/BaseRepository.ts
+```typescript
 @provide(BaseRepository)
 export class BaseRepository<T extends AvailableSchemas> implements IBaseRepository<T> {
   constructor(private repositoryAdapter: IRepositoryAdapter<T, Record<string, unknown>>) {}
@@ -159,7 +159,7 @@ export class BaseRepository<T extends AvailableSchemas> implements IBaseReposito
 
 #### `UserRepository.ts`
 
-```typescript:src/repositories/ModuleSystem/user/UserRepository.ts
+```typescript
 @provide(UserRepository)
 export class UserRepository extends BaseRepository<IUser> implements IBaseRepository<IUser> {
   constructor(
@@ -202,7 +202,7 @@ constructor(private signupUseCase: SignUpUseCase, private analyticsHelper: Analy
 
 Repositories act as intermediaries between the domain and data mapping layers, providing a collection-like interface for accessing domain objects.
 
-```typescript:src/repositories/ModuleSystem/user/UserRepository.ts
+```typescript
 export class UserRepository extends BaseRepository<IUser> implements IBaseRepository<IUser> {
   // Implementation...
 }
@@ -235,7 +235,7 @@ Our codebase leverages TypeScript's strong typing to ensure reliability and main
 
 Centralized error handling enhances consistency and simplifies debugging.
 
-```typescript:src/providers/database/repository/BaseRepository.ts
+```typescript
 public async create(data: Partial<T>, options?: IBaseRepositoryCreateOptions): Promise<T> {
   try {
     // Implementation...
@@ -253,7 +253,7 @@ public async create(data: Partial<T>, options?: IBaseRepositoryCreateOptions): P
 
 Ensures data integrity and security through validation middleware.
 
-```typescript:src/useCases/ModuleSystem/user/signup/SignUpController.ts
+```typescript
 @httpPost("/signup", rateLimiter, DTOValidatorMiddleware(AuthSignUpDTO))
 public async signUp(@requestBody() authSignUpDTO, @request() req, @response() res): Promise<IUser> {
   // Implementation...
