@@ -62,3 +62,8 @@ Then, make sure you run `docker-compose build startup-api` and `docker-compose u
 ## Dynamic Module Building
 
 By default, you can keep the default modules from .env as is. However, if you want to customize our API with different databases or services, you can [check this guide](./dynamic-module-building.md) for more information.
+
+
+## Architecture
+
+For more details, first [🎥 watch this video](https://www.youtube.com/watch?v=UOgEzvrsHOs) to better understand how our API is organized, and read the [clean architecture](./architecture/clean-architecture.md) and [examples](./architecture/examples.md) sections for more details.
