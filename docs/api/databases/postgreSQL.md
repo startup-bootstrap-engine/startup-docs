@@ -40,16 +40,23 @@ This project has a module to activate PostgreSQL as the database and Prisma as t
 
 ## Visualizing Data
 
+### Requirements
+
+- `MODULE_POSTGRESQL` activated in your `.env` file
+
 ### Using Prisma Studio
 
-You can access the database directly using the Prisma CLI:
+This is the easiest way to visualize your data. Simply activate the module `MODULE_PRISMA_STUDIO` in your `.env` file and run `yarn module:build`.
 
-1. Open a terminal in the project root.
-2. Run `npx prisma studio` to launch Prisma Studio, a visual database browser.
+Afterwards, check your browser at `http://localhost:5555/` to see the Prisma Studio interface.
 
 ### Using pgAdmin
 
-pgAdmin is a powerful administration and development platform for PostgreSQL. Follow these steps to use it:
+pgAdmin is a powerful administration and development platform for PostgreSQL.  
+
+Initially, make sure you have the `MODULE_PGADMIN` activated in your `.env` file.
+
+Follow these steps to use it:
 
 1. Access pgAdmin:
    - Open your web browser and navigate to `http://localhost:5050`
